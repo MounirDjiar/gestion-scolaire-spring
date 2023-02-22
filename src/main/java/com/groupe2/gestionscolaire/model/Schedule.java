@@ -2,6 +2,7 @@ package com.groupe2.gestionscolaire.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.groupe2.gestionscolaire.model.enums.Day;
 
 import jakarta.persistence.Entity;
@@ -9,13 +10,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Schedule {
@@ -24,22 +26,27 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NonNull
 	private Day day;
-	
-	@NonNull
+		
 	private String dStart;
 	
-	@NonNull
 	private String dEnd;
 	
-	@NonNull
+	
+	@OneToOne
+	@JsonIgnore
+	private Lesson lesson;
+			
+	@OneToOne
+	@JsonIgnore
+	private Classroom classroom;
+						
+	@OneToOne
+	@JsonIgnore
 	private Teacher teacher;
 	
-	@ManyToMany
-	private List<Classroom> classrooms;
-	
-	@ManyToMany
-	private List<Lesson> lessons;
+	@OneToOne
+	@JsonIgnore
+	private Clazz clazz;
 	
 }

@@ -1,7 +1,9 @@
 package com.groupe2.gestionscolaire.model;
 
+
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.groupe2.gestionscolaire.model.enums.SchoolType;
 
 import jakarta.persistence.Entity;
@@ -34,17 +36,21 @@ public class School {
 	
 	private String logo;
 	
+	
 	@OneToMany(mappedBy = "school")
+	@JsonIgnore
 	private List<Classroom> classrooms;
-	
-	
+					
 	@OneToMany(mappedBy = "school")
+	@JsonIgnore
 	private List<Teacher> teachers;
-	
-	
+		
 	@OneToMany(mappedBy = "school")
+	@JsonIgnore
 	private List<Lesson> lessons;
 	
 	@OneToMany(mappedBy = "school")
+	@JsonIgnore
 	private List<Clazz> clazzs;
-}
+	
+} 

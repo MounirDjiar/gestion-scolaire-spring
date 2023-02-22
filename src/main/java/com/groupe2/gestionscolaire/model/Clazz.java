@@ -3,6 +3,8 @@ package com.groupe2.gestionscolaire.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +18,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Clazz {
@@ -24,22 +25,24 @@ public class Clazz {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NonNull
+		
 	private String name;
 	
-	@NonNull
-	@OneToOne(mappedBy = "mainClazz")
-	private Teacher mainTeacher;
-	
-	
+
 	@ManyToOne
 	private School school;
+
 	
-	@ManyToMany
-	private List<Schedule> schedules;
-	
-	@ManyToMany
+	@ManyToMany(mappedBy = "clazzs")
+	@JsonIgnore
 	private List<Lesson> lessons;
 	
+	
+	@OneToOne
+	@JsonIgnore
+	private Teacher mainTeacher;
+	
+	@OneToOne(mappedBy = "clazz")
+	@JsonIgnore
+	private Schedule schedule;	
 }
