@@ -1,6 +1,5 @@
 package com.groupe2.gestionscolaire.model;
 
-import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,19 +12,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Teacher {
+public class Lesson {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String firstName;
+	private String name;
 	
-	private String lastName;
-	
-	private Date dob;
-	
-	private Lesson lesson;
-	
+	private String color;
 
 }
