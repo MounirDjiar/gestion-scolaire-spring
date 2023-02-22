@@ -34,15 +34,17 @@ public class School {
 	
 	private String logo;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "school")
 	private List<Classroom> classrooms;
 	
-	@OneToMany
+	
+	@OneToMany(mappedBy = "school")
 	private List<Teacher> teachers;
 	
-	@OneToMany
+	
+	@OneToMany(mappedBy = "school")
 	private List<Lesson> lessons;
 	
-	@OneToMany
-	private List<Clazz> Clazzs;
+	@OneToMany(mappedBy = "school")
+	private List<Clazz> clazzs;
 }

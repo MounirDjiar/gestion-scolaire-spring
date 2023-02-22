@@ -1,31 +1,42 @@
 package com.groupe2.gestionscolaire.model;
 
-import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class Teacher {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	private String firstName;
 	
 	private String lastName;
 	
-	private Date dob;
+	private String dob;
 	
-	private Lesson lesson;
 	
-
+	@ManyToOne
+	private School school;
+		
+	
+	@ManyToMany(mappedBy = "teachers")
+	private List<Lesson> lessons;
+	
+	@OneToOne
+	private Clazz mainClazz;
+			
 }
