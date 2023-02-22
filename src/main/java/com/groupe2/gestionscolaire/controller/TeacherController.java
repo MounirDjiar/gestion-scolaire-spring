@@ -32,7 +32,7 @@ public class TeacherController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Teacher> findOne(@PathVariable long id){
+	public ResponseEntity<Teacher> findOne(@PathVariable Long id){
 		Optional<Teacher> optionTeacher = tdao.findById(id);
 		
 		return optionTeacher.isPresent() ?
@@ -41,7 +41,7 @@ public class TeacherController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteOne(@PathVariable long id){
+	public ResponseEntity<Void> deleteOne(@PathVariable Long id){
 		this.tdao.deleteById(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 }

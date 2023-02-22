@@ -19,7 +19,7 @@ public class ClassroomController {
     public List<Classroom> getAllClassrooms() {
         return classroomDao.findAll();
     }
-
+    
     @GetMapping("/{id}")
     public Classroom getClassroomById(@PathVariable Long id) {
         return classroomDao.findById(id).orElse(null);
