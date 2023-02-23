@@ -15,8 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.groupe2.gestionscolaire.dao.ClassroomDao;
+import com.groupe2.gestionscolaire.dao.ClazzDao;
+import com.groupe2.gestionscolaire.dao.LessonDao;
 import com.groupe2.gestionscolaire.dao.SchoolDao;
+import com.groupe2.gestionscolaire.dao.TeacherDao;
+import com.groupe2.gestionscolaire.model.Classroom;
+import com.groupe2.gestionscolaire.model.Clazz;
+import com.groupe2.gestionscolaire.model.Lesson;
 import com.groupe2.gestionscolaire.model.School;
+import com.groupe2.gestionscolaire.model.Teacher;
 
 @RestController
 @CrossOrigin
@@ -25,7 +33,21 @@ public class SchoolController {
 
 	@Autowired
 	SchoolDao schoolDao;
-
+	
+	@Autowired
+	ClassroomDao classroomDao;
+	
+	
+	@Autowired
+	TeacherDao teacherDao;
+	
+	@Autowired
+	LessonDao lessonDao;
+	
+	@Autowired
+	ClazzDao clazzDao;
+	
+	
 	@GetMapping({ "", "/" })
 	public ResponseEntity<List<School>> finAll() {
 
@@ -55,7 +77,33 @@ public class SchoolController {
 
 	@PostMapping({ "", "/" })
 	public ResponseEntity<School> addOne(@RequestBody School school) {
+			
 		schoolDao.save(school);
 		return new ResponseEntity<School>(school, HttpStatus.CREATED);
 	}
+	
+	
+	@GetMapping("/{schoolID}/classrooms")	
+	public ResponseEntity<List<Classroom>> findClassroomsBySchoolId(@PathVariable Long schoolID) {
+		return new ResponseEntity<List<Classroom>>(classroomDao.findBySchoolId(schoolID), HttpStatus.OK); 					
+	}
+	
+	
+	@GetMapping("/{schoolID}/teachers")	
+	public ResponseEntity<List<Teacher>> findTeachersBySchoolId(@PathVariable Long schoolID) {
+		return new ResponseEntity<List<Teacher>>(teacherDao.findBySchoolId(schoolID), HttpStatus.OK); 					
+	}
+	
+	
+	@GetMapping("/{schoolID}/clazzs")	
+	public ResponseEntity<List<Clazz>> findClazzsBySchoolId(@PathVariable Long schoolID) {
+		return new ResponseEntity<List<Clazz>>(clazzDao.findBySchoolId(schoolID), HttpStatus.OK); 					
+	}
+	
+	@GetMapping("/{schoolID}/lessons")	
+	public ResponseEntity<List<Lesson>> findLessonsBySchoolId(@PathVariable Long schoolID) {
+		return new ResponseEntity<List<Lesson>>(lessonDao.findBySchoolId(schoolID), HttpStatus.OK); 					
+	}
+	
 }
+

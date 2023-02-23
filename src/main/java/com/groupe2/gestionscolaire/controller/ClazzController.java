@@ -20,7 +20,7 @@ import com.groupe2.gestionscolaire.dao.ClazzDao;
 import com.groupe2.gestionscolaire.model.Clazz;
 
 @RestController
-@RequestMapping("/clazz")
+@RequestMapping("/clazzs")
 public class ClazzController {
 
 	@Autowired
