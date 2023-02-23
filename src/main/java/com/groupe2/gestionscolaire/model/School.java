@@ -38,19 +38,19 @@ public class School {
 	
 	
 	@OneToMany(mappedBy = "school")
-	//@JsonIgnore
+	@JsonIgnore
 	private List<Classroom> classrooms;
 					
 	@OneToMany(mappedBy = "school")
-	//@JsonIgnore
+	@JsonIgnore
 	private List<Teacher> teachers;
 		
 	@OneToMany(mappedBy = "school")
-	//@JsonIgnore
+	@JsonIgnore
 	private List<Lesson> lessons;
 	
 	@OneToMany(mappedBy = "school")
-	//@JsonIgnore
+	@JsonIgnore
 	private List<Clazz> clazzs;
 	
 } 

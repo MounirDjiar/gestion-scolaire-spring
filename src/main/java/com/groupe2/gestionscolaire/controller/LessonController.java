@@ -52,5 +52,4 @@ public class LessonController {
 		return new ResponseEntity<Lesson>(lesson, HttpStatus.CREATED);
 	}
 
-	
 }

@@ -23,7 +23,7 @@ public class Classroom {
     
     
     @ManyToOne
-    @JsonIgnore
+    //@JsonIgnore
     private School school;
     
     @ManyToMany(mappedBy = "classrooms")

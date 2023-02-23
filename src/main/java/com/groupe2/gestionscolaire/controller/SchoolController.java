@@ -88,13 +88,11 @@ public class SchoolController {
 		return new ResponseEntity<List<Classroom>>(classroomDao.findBySchoolId(schoolID), HttpStatus.OK); 					
 	}
 	
-	
 	@GetMapping("/{schoolID}/teachers")	
 	public ResponseEntity<List<Teacher>> findTeachersBySchoolId(@PathVariable Long schoolID) {
 		return new ResponseEntity<List<Teacher>>(teacherDao.findBySchoolId(schoolID), HttpStatus.OK); 					
 	}
-	
-	
+		
 	@GetMapping("/{schoolID}/clazzs")	
 	public ResponseEntity<List<Clazz>> findClazzsBySchoolId(@PathVariable Long schoolID) {
 		return new ResponseEntity<List<Clazz>>(clazzDao.findBySchoolId(schoolID), HttpStatus.OK); 					

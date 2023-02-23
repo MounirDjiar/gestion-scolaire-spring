@@ -31,7 +31,7 @@ public class Lesson {
 	
 	
 	@ManyToOne
-	@JsonIgnore
+	//@JsonIgnore
 	private School school;
 	
 	
@@ -43,13 +43,11 @@ public class Lesson {
 	@ManyToMany
 	@JsonIgnore
 	private List<Classroom> excludedClassrooms;
-	
-	
+		
 	@ManyToMany
 	@JsonIgnore
 	private List<Teacher> teachers;
-	
-	
+		
 	@ManyToMany
 	@JsonIgnore
 	private List<Clazz> clazzs;
