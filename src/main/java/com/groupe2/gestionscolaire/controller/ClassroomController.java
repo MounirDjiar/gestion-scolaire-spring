@@ -1,6 +1,8 @@
 package com.groupe2.gestionscolaire.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.groupe2.gestionscolaire.model.Classroom;
 import com.groupe2.gestionscolaire.dao.ClassroomDao;
@@ -16,24 +18,24 @@ public class ClassroomController {
     private ClassroomDao classroomDao;
 
     @GetMapping
-    public List<Classroom> getAllClassrooms() {
-        return classroomDao.findAll();
+    public ResponseEntity<List<Classroom>> getAllClassrooms() {
+    	
+    	return new ResponseEntity<List<Classroom>>(classroomDao.findAll(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
     public Classroom getClassroomById(@PathVariable Long id) {
         return classroomDao.findById(id).orElse(null);
     }
-
+    
     @PostMapping
     public Classroom createClassroom(@RequestBody Classroom classroom) {
         return classroomDao.save(classroom);
     }
-
-
+    
     @DeleteMapping("/{id}")
     public void deleteClassroom(@PathVariable Long id) {
         classroomDao.deleteById(id);
-    }
+    }                
 
 }
