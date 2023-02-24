@@ -32,7 +32,6 @@ public class Teacher {
 	private String dob;
 			
 	@ManyToOne
-	@JsonIgnore
 	private School school;
 	
 	@ManyToMany(mappedBy = "teachers")

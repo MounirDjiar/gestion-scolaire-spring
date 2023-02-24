@@ -23,7 +23,6 @@ public class Classroom {
     
     
     @ManyToOne
-    //@JsonIgnore
     private School school;
     
     @ManyToMany(mappedBy = "classrooms")
@@ -32,7 +31,6 @@ public class Classroom {
     
                   
     @ManyToMany(mappedBy = "excludedClassrooms")
-    @JsonIgnore
     private List<Lesson> excludedLessons;
     
     @OneToOne(mappedBy = "classroom")

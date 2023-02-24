@@ -39,7 +39,6 @@ public class Clazz {
 	
 	
 	@OneToOne
-	@JsonIgnore
 	private Teacher mainTeacher;
 	
 	@OneToOne(mappedBy = "clazz")

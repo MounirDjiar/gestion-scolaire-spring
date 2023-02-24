@@ -30,8 +30,7 @@ public class Lesson {
 	private String color;
 	
 	
-	@ManyToOne
-	//@JsonIgnore
+	@ManyToOne	
 	private School school;
 	
 	
