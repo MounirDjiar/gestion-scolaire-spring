@@ -33,9 +33,9 @@ public class Clazz {
 	private School school;
 
 	
-	@ManyToMany(mappedBy = "clazzs")
-	@JsonIgnore
-	private List<Lesson> lessons;
+	//@ManyToMany(mappedBy = "clazzs")
+	//@JsonIgnore
+	//private List<Lesson> lessons;
 	
 	
 	@OneToOne

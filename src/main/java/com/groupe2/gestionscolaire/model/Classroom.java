@@ -3,6 +3,7 @@ package com.groupe2.gestionscolaire.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,14 +25,18 @@ public class Classroom {
     
     @ManyToOne
     private School school;
-    
-    @ManyToMany(mappedBy = "classrooms")
-    @JsonIgnore
-    private List<Lesson> lessons;
-    
-                  
-    @ManyToMany(mappedBy = "excludedClassrooms")
+        
+    // A verifier
+    @ManyToMany
+    @JsonIgnoreProperties("excludedClassrooms")
     private List<Lesson> excludedLessons;
+    
+        
+    // A verifier
+    //@ManyToMany(mappedBy = "classrooms")
+    //@JsonIgnore
+    //private List<Lesson> lessons;
+       
     
     @OneToOne(mappedBy = "classroom")
     @JsonIgnore
