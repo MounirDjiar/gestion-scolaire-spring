@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,27 +33,31 @@ public class Lesson {
 	
 	@ManyToOne	
 	private School school;
-	
-	
-	@ManyToMany
-	@JsonIgnore
-	private List<Classroom> classrooms;
-		
-	
-	@ManyToMany
+			
+	@ManyToMany(mappedBy = "excludedLessons", cascade = CascadeType.MERGE)
 	@JsonIgnore
 	private List<Classroom> excludedClassrooms;
+	
 		
-	@ManyToMany
+	@ManyToMany(mappedBy = "lessons", cascade = CascadeType.MERGE)
 	@JsonIgnore
 	private List<Teacher> teachers;
-		
-	@ManyToMany
-	@JsonIgnore
-	private List<Clazz> clazzs;
+	
+			
+	
+	// A VERIFIER
+	//@ManyToMany
+	//@JsonIgnore
+	//private List<Classroom> classrooms;
+	
+	
+	// A VERIFIER
+	//@ManyToMany
+	//@JsonIgnore
+	//private List<Clazz> clazzs;
 	
 								
 	@OneToOne(mappedBy = "lesson")
 	@JsonIgnore
-	private Schedule schedule;			
+	private Schedule schedule;
 }

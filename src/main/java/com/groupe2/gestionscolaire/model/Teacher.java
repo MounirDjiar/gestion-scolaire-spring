@@ -3,7 +3,9 @@ package com.groupe2.gestionscolaire.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,7 +36,8 @@ public class Teacher {
 	@ManyToOne
 	private School school;
 	
-	@ManyToMany(mappedBy = "teachers")	
+	@ManyToMany
+	@JsonIgnoreProperties("teachers")
 	private List<Lesson> lessons;
 	
 	
