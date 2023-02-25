@@ -34,8 +34,7 @@ public class Teacher {
 	@ManyToOne
 	private School school;
 	
-	@ManyToMany(mappedBy = "teachers")
-	@JsonIgnore
+	@ManyToMany(mappedBy = "teachers")	
 	private List<Lesson> lessons;
 	
 	
