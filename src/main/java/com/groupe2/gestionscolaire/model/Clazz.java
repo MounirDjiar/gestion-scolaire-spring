@@ -5,12 +5,14 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,7 +43,8 @@ public class Clazz {
 	@OneToOne
 	private Teacher mainTeacher;
 	
-	@OneToOne(mappedBy = "clazz")
+	
+	@OneToMany(mappedBy = "clazz", cascade = CascadeType.MERGE)
 	@JsonIgnore
-	private Schedule schedule;	
+	private List<Schedule> schedules;	
 }

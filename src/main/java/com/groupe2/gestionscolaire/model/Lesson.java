@@ -57,7 +57,7 @@ public class Lesson {
 	//private List<Clazz> clazzs;
 	
 								
-	@OneToOne(mappedBy = "lesson")
+	@OneToMany(mappedBy = "lesson", cascade = CascadeType.MERGE)
 	@JsonIgnore
-	private Schedule schedule;
+	private List<Schedule> schedule;
 }

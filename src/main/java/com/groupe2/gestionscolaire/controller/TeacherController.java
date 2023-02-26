@@ -42,7 +42,8 @@ public class TeacherController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteOne(@PathVariable Long id){
-		this.tdao.deleteById(id);
+		
+		this.tdao.deleteById(id);				
 		return new ResponseEntity<Void>(HttpStatus.OK);
 }
 	

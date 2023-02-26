@@ -38,8 +38,8 @@ public class Classroom {
     //private List<Lesson> lessons;
        
     
-    @OneToOne(mappedBy = "classroom")
-    @JsonIgnore
-    private Schedule schedule;       
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.MERGE)
+	@JsonIgnore
+	private List<Schedule> schedules;     
     
 }
