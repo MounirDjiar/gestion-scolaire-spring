@@ -45,7 +45,7 @@ public class Teacher {
 	@JsonIgnore
 	private Clazz mainClazz;
 	
-	@OneToOne(mappedBy = "teacher")
+	@OneToMany(mappedBy = "teacher", cascade = CascadeType.MERGE)
 	@JsonIgnore
-	private Schedule schedule;				
+	private List<Schedule> schedules;				
 }
