@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.groupe2.gestionscolaire.dao.TeacherDao;
+import com.groupe2.gestionscolaire.model.Lesson;
 import com.groupe2.gestionscolaire.model.Teacher;
 
 @RestController
@@ -29,6 +30,11 @@ public class TeacherController {
 	@GetMapping({"", "/"})
 	public ResponseEntity<List<Teacher>> findAll(){
 		return new ResponseEntity<List<Teacher>>(tdao.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/lessons/{lessonID}")
+	public ResponseEntity<List<Teacher>> findByLessonId(@PathVariable Long lessonID){
+		return new ResponseEntity<List<Teacher>>(tdao.findByLessonsId(lessonID), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")

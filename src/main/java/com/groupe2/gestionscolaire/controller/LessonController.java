@@ -31,6 +31,12 @@ public class LessonController {
 		return new ResponseEntity<List<Lesson>>(ldao.findAll(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/teachers/{teacherId}/")
+	public ResponseEntity<List<Lesson>> findByTeachersId(@PathVariable Long teacherId) {			
+		return new ResponseEntity<List<Lesson>>(ldao.findByTeachersId(teacherId), HttpStatus.OK);
+	}
+	
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Lesson> findOne(@PathVariable long id){
 		Optional<Lesson> optionLesson = ldao.findById(id);

@@ -35,6 +35,10 @@ public class Schedule {
 	
 	
 	@ManyToOne	
+	private School school;
+	
+	
+	@ManyToOne	
 	private Lesson lesson;
 			
 	@ManyToOne	
