@@ -35,7 +35,10 @@ public class School {
 	private String phoneNumber;
 	
 	private String logo;
-	
+		
+	@OneToMany(mappedBy = "school")
+	@JsonIgnore
+	private List<Schedule> schedules;
 	
 	@OneToMany(mappedBy = "school")
 	@JsonIgnore
