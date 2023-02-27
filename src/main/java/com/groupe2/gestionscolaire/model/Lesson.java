@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,45 +17,35 @@ import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @NoArgsConstructor
 public class Lesson {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String name;
-	
+
 	private String color;
-	
-	
+
 	@ManyToOne
-	//@JsonIgnore
+//	@JsonIgnore
 	private School school;
-	
-	
+
+////	@ManyToMany(cascade= {CascadeType.ALL})
 	@ManyToMany
-	@JsonIgnore
+//	@JsonIgnore
 	private List<Classroom> classrooms;
-		
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "excludedLessons", cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
+//	@ManyToMany
 	@JsonIgnore
 	private List<Classroom> excludedClassrooms;
-		
-	@ManyToMany
-	@JsonIgnore
-	private List<Teacher> teachers;
-		
-	@ManyToMany
-	@JsonIgnore
-	private List<Clazz> clazzs;
 	
-								
-	@OneToOne(mappedBy = "lesson")
-	@JsonIgnore
-	private Schedule schedule;			
+//	@ManyToMany(mappedBy="taughtLessons")
+	@ManyToMany
+//	@JsonIgnore
+	private List<Teacher> teachers;
 }

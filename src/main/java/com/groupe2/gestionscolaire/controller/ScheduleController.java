@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.groupe2.gestionscolaire.dao.ScheduleDao;
+import com.groupe2.gestionscolaire.model.Clazz;
 import com.groupe2.gestionscolaire.model.Schedule;
+import com.groupe2.gestionscolaire.model.School;
+import com.groupe2.gestionscolaire.model.Teacher;
 
 @RestController
 @RequestMapping("/schedules")
@@ -54,5 +57,26 @@ public class ScheduleController {
 	public ResponseEntity<Schedule> addOne(@RequestBody Schedule Schedule) {
 		this.scheduleDao.save(Schedule);
 		return new ResponseEntity<Schedule>(Schedule, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/{id}/teacher")
+	public ResponseEntity<Teacher> findTeacherByScheduleId(@PathVariable Long id) {
+		Teacher teacher = scheduleDao.findTeacherByScheduleId(id);
+		return teacher.equals(null) ? new ResponseEntity<Teacher>(HttpStatus.NOT_FOUND)
+				: new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}/school")
+	public ResponseEntity<School> findSchoolByScheduleId(@PathVariable Long id) {
+		School school = scheduleDao.findSchoolByScheduleId(id);
+		return school.equals(null) ? new ResponseEntity<School>(HttpStatus.NOT_FOUND)
+				: new ResponseEntity<School>(school, HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}/clazz")
+	public ResponseEntity<Clazz> findClazzByScheduleId(@PathVariable Long id) {
+		Clazz clazz = scheduleDao.findClazzByScheduleId(id);
+		return clazz.equals(null) ? new ResponseEntity<Clazz>(HttpStatus.NOT_FOUND)
+				: new ResponseEntity<Clazz>(clazz, HttpStatus.OK);
 	}
 }

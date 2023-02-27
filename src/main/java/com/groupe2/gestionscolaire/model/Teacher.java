@@ -1,5 +1,6 @@
 package com.groupe2.gestionscolaire.model;
 
+
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,21 +31,21 @@ public class Teacher {
 	private String lastName;
 	
 	private String dob;
-			
+	
 	@ManyToOne
-	@JsonIgnore
-	private School school;
+    @JsonIgnore
+    private School school;
 	
-	@ManyToMany(mappedBy = "teachers")
+	@OneToMany(mappedBy = "mainTeacher")
 	@JsonIgnore
-	private List<Lesson> lessons;
+	private List<Clazz> mainClazzs;
 	
-	
-	@OneToOne(mappedBy = "mainTeacher")
+	@OneToMany(mappedBy = "teacher")
 	@JsonIgnore
-	private Clazz mainClazz;
+	private List<Schedule> schedules;
 	
-	@OneToOne(mappedBy = "teacher")
+	@ManyToMany
 	@JsonIgnore
-	private Schedule schedule;				
+	private List<Lesson> taughtLessons;
+					
 }

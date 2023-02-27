@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.groupe2.gestionscolaire.dao.ClazzDao;
+import com.groupe2.gestionscolaire.dao.TeacherDao;
 import com.groupe2.gestionscolaire.model.Clazz;
+import com.groupe2.gestionscolaire.model.Lesson;
+import com.groupe2.gestionscolaire.model.Schedule;
+import com.groupe2.gestionscolaire.model.Teacher;
 
 @RestController
 @RequestMapping("/clazzs")
@@ -25,20 +29,22 @@ public class ClazzController {
 
 	@Autowired
 	ClazzDao clazzDao;
-	
-	@GetMapping({"", "/"})
+
+	@Autowired
+	TeacherDao teacherDao;
+
+	@GetMapping({ "", "/" })
 	public ResponseEntity<List<Clazz>> findAll(@RequestParam(defaultValue = "0") Integer init, Model model) {
-		return new ResponseEntity<List<Clazz>>(clazzDao.findAll(), HttpStatus.OK);		
+		return new ResponseEntity<List<Clazz>>(clazzDao.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Clazz> findOne(@PathVariable long id) {
 		Optional<Clazz> optionalClazz = clazzDao.findById(id);
-		return optionalClazz.isPresent()?
-				new ResponseEntity<Clazz>(optionalClazz.get(), HttpStatus.OK) :
-				new ResponseEntity<Clazz>(HttpStatus.NOT_FOUND);
+		return optionalClazz.isPresent() ? new ResponseEntity<Clazz>(optionalClazz.get(), HttpStatus.OK)
+				: new ResponseEntity<Clazz>(HttpStatus.NOT_FOUND);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteOne(@PathVariable long id) {
 		Optional<Clazz> optionalClazz = clazzDao.findById(id);
@@ -49,10 +55,27 @@ public class ClazzController {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@PostMapping({"","/"})
+
+	@PostMapping({ "", "/" })
 	public ResponseEntity<Clazz> addOne(@RequestBody Clazz Clazz) {
 		this.clazzDao.save(Clazz);
 		return new ResponseEntity<Clazz>(Clazz, HttpStatus.CREATED);
+	}
+
+	@GetMapping("/{id}/mainteacher")
+	public ResponseEntity<Teacher> findMainTeacher(@PathVariable Long id) {
+		Teacher mainTeacher = clazzDao.findMainTeacherByClassId(id);
+		if (mainTeacher.equals(null)) {
+			return new ResponseEntity<Teacher>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Teacher>(mainTeacher, HttpStatus.OK);
+		}
+	}
+
+	@GetMapping("/{id}/schedules")
+	public ResponseEntity<List<Schedule>> findSchedules(@PathVariable Long id) {
+		List<Schedule> schedule = clazzDao.findSchedulesByClazzId(id);
+		return schedule.isEmpty() ? new ResponseEntity<List<Schedule>>(schedule, HttpStatus.OK)
+				: new ResponseEntity<List<Schedule>>(HttpStatus.NOT_FOUND);
 	}
 }

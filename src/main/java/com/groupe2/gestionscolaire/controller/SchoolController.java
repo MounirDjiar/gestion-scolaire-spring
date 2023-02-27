@@ -1,11 +1,13 @@
 package com.groupe2.gestionscolaire.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.groupe2.gestionscolaire.FileUploadUtil;
 import com.groupe2.gestionscolaire.dao.ClassroomDao;
 import com.groupe2.gestionscolaire.dao.ClazzDao;
 import com.groupe2.gestionscolaire.dao.LessonDao;
@@ -74,6 +79,9 @@ public class SchoolController {
 
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
+	
+	
+	
 
 	@PostMapping({ "", "/" })
 	public ResponseEntity<School> addOne(@RequestBody School school) {
@@ -81,6 +89,32 @@ public class SchoolController {
 		schoolDao.save(school);
 		return new ResponseEntity<School>(school, HttpStatus.CREATED);
 	}
+	
+	
+	
+	
+//	@PostMapping({ "", "/" })
+//	public ResponseEntity<School> addOne(@RequestBody School school, @RequestParam("logo") MultipartFile logo) throws IOException  {
+//		
+//		String fileName = StringUtils.cleanPath(logo.getOriginalFilename());
+//		school.setLogo(fileName);
+//		School savedSchool = schoolDao.save(school);
+//		
+//		String uploadDir = "user-photos/" + savedSchool.getId();
+//        FileUploadUtil.saveFile(uploadDir, fileName, logo);
+//        
+//		schoolDao.save(school);
+//		return new ResponseEntity<School>(school, HttpStatus.CREATED);
+//	}
+//	
+	
+//	@PostMapping({ "", "/" })
+//	public ResponseEntity<School> addOne(@RequestParam("logo")MultipartFile logo, @RequestBody School school) {
+//		school.setLogo(logo);	
+//		schoolDao.save(school);
+//		return new ResponseEntity<School>(school, HttpStatus.CREATED);
+//	}
+	
 	
 	
 	@GetMapping("/{schoolID}/classrooms")	

@@ -1,18 +1,24 @@
 package com.groupe2.gestionscolaire.model;
 
 
+import java.sql.Blob;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.groupe2.gestionscolaire.model.enums.SchoolType;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,7 +40,8 @@ public class School {
 	
 	private String phoneNumber;
 	
-	private String logo;
+	@OneToOne
+    private Logo  logo;
 	
 	
 	@OneToMany(mappedBy = "school")
@@ -52,5 +59,9 @@ public class School {
 	@OneToMany(mappedBy = "school")
 	@JsonIgnore
 	private List<Clazz> clazzs;
+	
+	@OneToMany(mappedBy = "school")
+	@JsonIgnore
+	private List<Schedule> schedules;
 	
 } 

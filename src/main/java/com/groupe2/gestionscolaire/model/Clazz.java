@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,21 +29,15 @@ public class Clazz {
 		
 	private String name;
 	
-
 	@ManyToOne
-	private School school;
-
+    @JsonIgnore
+    private School school;
 	
-	@ManyToMany(mappedBy = "clazzs")
-	@JsonIgnore
-	private List<Lesson> lessons;
-	
-	
-	@OneToOne
+	@ManyToOne
 	@JsonIgnore
 	private Teacher mainTeacher;
 	
-	@OneToOne(mappedBy = "clazz")
+	@OneToMany(mappedBy = "clazz")
 	@JsonIgnore
-	private Schedule schedule;	
+	private List<Schedule> schedules;
 }
