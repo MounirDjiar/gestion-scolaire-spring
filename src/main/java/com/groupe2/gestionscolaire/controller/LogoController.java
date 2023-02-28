@@ -66,6 +66,8 @@ public class LogoController {
         logoDao.save(img);
         return ResponseEntity.status(HttpStatus.OK);
     }
+	
+	
 
     @GetMapping(path = {"/get/{imageName}"})
     public Logo getImage(@PathVariable("imageName") String imageName) throws IOException {
@@ -96,6 +98,8 @@ public class LogoController {
 
         return outputStream.toByteArray();
     }
+    
+    
 
     // uncompress the image bytes before returning it to the angular application
     public static byte[] decompressBytes(byte[] data) {
