@@ -26,7 +26,7 @@ public class Classroom {
     @ManyToOne
     private School school;
         
-    // A verifier
+    
     @ManyToMany(cascade = CascadeType.MERGE)
     @JsonIgnoreProperties("excludedClassrooms")
     private List<Lesson> excludedLessons;
