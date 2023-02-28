@@ -3,6 +3,7 @@ package com.groupe2.gestionscolaire.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -34,7 +35,7 @@ public class Lesson {
 	@ManyToOne	
 	private School school;
 			
-	@ManyToMany(mappedBy = "excludedLessons", cascade = CascadeType.MERGE)
+	@ManyToMany(mappedBy = "excludedLessons")	
 	@JsonIgnore
 	private List<Classroom> excludedClassrooms;
 	
